@@ -1,29 +1,25 @@
 <!DOCTYPE html>
-<!--
- @license
- Copyright 2025 Google LLC. All Rights Reserved.
- SPDX-License-Identifier: Apache-2.0
--->
-
-
 <html>
 
 <head>
-    <title>Add a Map using HTML</title>
-
-    <link rel="stylesheet" type="text/css" href="./style.css" />
-    <script type="module" src="./index.js"></script>
+    <title>Google Maps</title>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+    <script type="module" src="./script.js"></script>
 </head>
 
 <body>
-    <gmp-map center="38.7946,-106.5348" zoom="4" map-id="DEMO_MAP_ID" style="height: 400px">
-    </gmp-map>
+    <div id="map"></div>
 
-    <!--
-      The `defer` attribute causes the script to execute after the full HTML
-      document has been parsed. -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuhECSDEee0gDKu-Xkv1cMnQQUh0d9y7w&libraries=maps"
-        defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuhECSDEee0gDKu-Xkv1cMnQQUh0d9y7w&v=weekly" async
+        defer>
+        </script>
+
+
 </body>
 
 </html>
