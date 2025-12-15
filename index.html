@@ -9,15 +9,39 @@
             width: 100%;
         }
     </style>
+    <link rel="stylesheet" href="styles.css">
     <script type="module" src="./script.js"></script>
 </head>
 
 <body>
-    <div id="map"></div>
+    <div class="app">
+        <aside class="quiz-container">
+            <h2>Map Quiz</h2>
+            <h3>Double click on the map the location of:</h3>
+            <h2 id="timerDisplay"><strong>Timer:</strong> 0s</h2>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuhECSDEee0gDKu-Xkv1cMnQQUh0d9y7w&v=weekly" async
-        defer>
-        </script>
+            <div id="questions" class="questions-pop"></div>
+
+            <div id="feedback-${index}" class="feedback-bubble hidden"></div>
+
+        </aside>
+
+        <div class="map-container" id="mapContainer">
+            <div id="map"></div>
+        </div>
+
+
+    </div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuhECSDEee0gDKu-Xkv1cMnQQUh0d9y7w&callback=initMap"
+        async defer></script>
+
+    <div id="gameOverPopUp" class="pop hidden">
+        <div class="pop-content">
+            <h2>Game Over 🎉</h2>
+            <p id="resultText">You got 0 out of 5 correct.</p>
+            <button id="restartButton">Restart Game</button>
+        </div>
+    </div>
 
 
 </body>
