@@ -2,7 +2,9 @@ let correctCount = 0;
 let incorrectCount = 0;
 let currentQuestionIndex = 0;
 let timer = 0;
+let highScore = parseInt(localStorage.getItem("highScore")) || 0;
 let timerInterval = null;
+let newHighScore = false;
 let gameIsActive = true;
 let rectangles = [];
 let map;
@@ -109,6 +111,9 @@ async function initMap() {
         map.getCenter().lat(),
         map.getCenter().lng()
     );
+
+    updateHighScoreDisplay();
+
 }
 
 
@@ -155,7 +160,7 @@ function mapDoubleClick(event) {
         gameIsActive = false;
         showGameOver();
     }
-    showFeedback(isCorrect, currentLocation.name);
+    showAnswer(isCorrect, currentLocation.name);
 }
 
 //check if the double click is in the rectangle
@@ -182,30 +187,41 @@ function showQuestion(index) {
         <p>${questionData.question}</p>
     `;
 
-    const feedbackBubble = document.createElement("div");
-    feedbackBubble.id = `feedback-${index}`;
-    feedbackBubble.className = "feedback-bubble hidden"
+    const answerBubble = document.createElement("div");
+    answerBubble.id = `answer-${index}`;
+    answerBubble.className = "answer-bubble hidden"
 
     questions.appendChild(block);
-    questions.appendChild(feedbackBubble);
+    questions.appendChild(answerBubble);
 }
 
-// feedback bubble under question
-function showFeedback(isCorrect, name) {
-    const feedback = document.getElementById(`feedback-${currentQuestionIndex - 1}`);
-    feedback.classList.remove("hidden");
-    if (feedback) {
-        feedback.textContent = isCorrect
+// answer bubble under question
+function showAnswer(isCorrect, name) {
+    const answer = document.getElementById(`answer-${currentQuestionIndex - 1}`);
+    answer.classList.remove("hidden");
+    if (answer) {
+        answer.textContent = isCorrect
             ? `Your answer is correct!`
             : `Nope! Incorrect!`;
     }
 }
 
+//  game over pop up
 function showGameOver() {
     clearInterval(timerInterval);
+    if (correctCount > highScore) {
+        highScore = correctCount;
+        localStorage.setItem("highScore", highScore);
+        newHighScore = true;
+    }
     const popUp = document.getElementById("gameOverPopUp");
     const resultText = document.getElementById("resultText");
+
+
     resultText.textContent = `You got ${correctCount} out of ${locations.length} correct in ${timer} seconds.`;
+    if (newHighScore) {
+        resultText.textContent += `\nNew High Score: ${highScore}`;
+    }
     popUp.classList.remove("hidden");
 }
 
@@ -217,6 +233,7 @@ function restartGame() {
     gameIsActive = true;
     clearInterval(timerInterval);
     timer = 0;
+    //timer
     document.getElementById("timerDisplay").textContent = `Time: ${timer}s`;
 
     timerInterval = setInterval(() => {
@@ -237,7 +254,17 @@ function restartGame() {
     // Show first question again
     showQuestion(currentQuestionIndex);
 
+    //Updates high schore display
+    updateHighScoreDisplay();
+
+
 }
+
+function updateHighScoreDisplay() {
+    const display = document.getElementById("highScoreDisplay");
+    display.textContent = `High Score: ${highScore}`;
+}
+
 
 window.addEventListener("DOMContentLoaded", () => {
     const restartButton = document.getElementById("restartButton");
