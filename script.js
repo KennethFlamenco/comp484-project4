@@ -228,7 +228,7 @@ function showGameOver() {
 
     resultText.textContent = `You got ${correctCount} out of ${locations.length} correct in ${timer} seconds.`;
     if (newHighScore) {
-        resultText.textContent += `\nNew High Score: ${highScore}`;
+        resultText.textContent += `\n New High Score: ${highScore}`;
     }
     popUp.classList.remove("hidden");
 }

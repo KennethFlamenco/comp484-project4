@@ -75,7 +75,7 @@ body {
 .pop-content button {
     margin-top: 20px;
     padding: 10px 20px;
-    background-color: #50f7c2;
+    background-color: #631844;
     color: #fff;
     border: none;
     border-radius: 6px;
@@ -84,7 +84,7 @@ body {
 }
 
 .pop-content button:hover {
-    background-color: #3ecfa5;
+    background-color: #f30590;
 }
 
 .questions-pop {
