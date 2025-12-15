@@ -113,11 +113,11 @@ body {
 }
 
 .answer-bubble.correct {
-    border-left: 6px solid green;
+    border: 6px solid green;
 }
 
 .answer-bubble.incorrect {
-    border-left: 6px solid red;
+    border: 6px solid red;
 }
 
 .hidden {

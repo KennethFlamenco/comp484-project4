@@ -2,7 +2,7 @@ let correctCount = 0;
 let incorrectCount = 0;
 let currentQuestionIndex = 0;
 let timer = 0;
-let highScore = parseInt(localStorage.getItem("highScore")) || 0;
+let highScore = parseInt(localStorage.getItem("highScore")) || 0; // stores high score into system
 let timerInterval = null;
 let newHighScore = false;
 let gameIsActive = true;
@@ -203,6 +203,14 @@ function showAnswer(isCorrect, name) {
         answer.textContent = isCorrect
             ? `Your answer is correct!`
             : `Nope! Incorrect!`;
+        answer.classList.add("answer-bubble");
+    }
+
+    if (isCorrect) {
+        answer.classList.add("correct");
+    }
+    else {
+        answer.classList.add("incorrect");
     }
 }
 
@@ -265,7 +273,7 @@ function updateHighScoreDisplay() {
     display.textContent = `High Score: ${highScore}`;
 }
 
-
+// Sets up the restart button once the html is loaded and the button is pressed
 window.addEventListener("DOMContentLoaded", () => {
     const restartButton = document.getElementById("restartButton");
     if (restartButton) {
@@ -273,6 +281,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+// Intializes the map after the full page is loaded 
 window.addEventListener("load", () => {
     initMap().then(() => {
         restartGame();
